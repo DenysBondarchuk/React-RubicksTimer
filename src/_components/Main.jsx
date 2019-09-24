@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import Scramble from './Scramble';
 import Statistics from './Statistics';
+import Timer from './Timer';
 
 import scrambleShuffle from '../_helpers/scrambleShuffle';
 
@@ -9,8 +10,6 @@ class Main extends Component {
 
   state = {
     results: [],
-    seconds: 0,
-    milliseconds: 0,
     run: false,
     scramble: null,
   }
@@ -21,56 +20,21 @@ class Main extends Component {
     })
   }
 
-  tick = () => {
+  setResult = (value) => {
+    this.setState(state => {
+      // const results = state.results.push(value);
+      // const results = state.results.concat(value);
+      const results = [...state.results, value];
+      return {
+        results,
+      };
+    });
     this.setState({
-      milliseconds: this.state.milliseconds + 1,
-    })
+      scramble: scrambleShuffle(),
+    });
   };
 
-  startTimer = () => {
-    this.timer = setInterval(this.tick, 10);
-  }
-
-  stopTimer = () => {
-    clearInterval(this.timer);
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.timer);
-  }
-
-  handleKeyClick = (e) => {
-    if(e.keyCode === 32 && this.state.run === false) {
-      this.setState({
-        milliseconds: 0,
-      });
-      this.startTimer();
-      this.setState({
-        run: true,
-      });
-    }
-    else if (this.state.run === true) {
-      this.stopTimer();
-
-      this.setState(state => {
-        const results = state.results.concat(state.milliseconds);
-        return {
-          results
-        }
-      })
-
-      this.setState({
-        run: false,
-        scramble: scrambleShuffle(),
-      })
-    }
-  }
-
   render() {
-    const {
-      seconds,
-      milliseconds,
-    } = this.state;
     return (
       <div className="timer">
 
@@ -78,9 +42,7 @@ class Main extends Component {
 
         <div className="timer__container">
 
-          <div className="timer__main" onKeyDown={this.handleKeyClick} tabIndex="0" >
-            <div className="timer__run">{seconds}:{milliseconds}</div>
-          </div>
+          <Timer setResult={this.setResult} />
 
           <div className="timer__results">
             {

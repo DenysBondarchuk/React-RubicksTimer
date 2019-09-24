@@ -3,8 +3,8 @@ import React from 'react';
 const Scramble = ({scramble}) => {
   return (
     <div className="scramble">
-      <p className="scramble__name">scramble:</p>
-      <p className="scramble__value">{ scramble }</p>
+      <span className="scramble__name">scramble: </span>
+      <span className="scramble__value">{ scramble }</span>
     </div>
   );
 };

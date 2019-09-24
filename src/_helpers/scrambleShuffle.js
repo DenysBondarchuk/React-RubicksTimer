@@ -43,7 +43,7 @@ export const scrambleShuffle = () => {
 	}
 
 	for (let i = 0; i < newArr.length; i++) {
-		var rndAdd = Math.floor(Math.random() * (4 - 1)) + 1;
+		let rndAdd = Math.floor(Math.random() * (4 - 1)) + 1;
 
 		if (rndAdd === 1) {
 			newArr[i] = newArr[i];
