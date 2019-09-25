@@ -5,34 +5,41 @@ import Statistics from './Statistics';
 import Timer from './Timer';
 
 import scrambleShuffle from '../_helpers/scrambleShuffle';
+import Results from './Results';
 
 class Main extends Component {
 
   state = {
     results: [],
+    scrumbleList: [],
     run: false,
     scramble: null,
   }
 
   componentDidMount() {
     this.setState({
-      scramble: scrambleShuffle()
+      scramble: scrambleShuffle(),
     })
   }
 
   setResult = (value) => {
     this.setState(state => {
-      // const results = state.results.push(value);
-      // const results = state.results.concat(value);
       const results = [...state.results, value];
+      const scrumbleList = [...state.scrumbleList, state.scramble];
       return {
         results,
+        scrumbleList,
       };
     });
     this.setState({
       scramble: scrambleShuffle(),
     });
   };
+
+  deleteResult = (index) => {
+    const results = this.state.results.filter((_, i) => i !== index);
+    this.setState({ results });
+  }
 
   render() {
     return (
@@ -44,17 +51,22 @@ class Main extends Component {
 
           <Timer setResult={this.setResult} />
 
-          <div className="timer__results">
-            {
-              this.state.results.map((item, index) => {
-                return <p className="timer__result" key={index}>{item}</p>;
-              })
-            }
-          </div>
+          <Results
+            results={this.state.results}
+            deleteResult={this.deleteResult}
+          />
 
-          <Statistics />
+          <Statistics results={this.state.results} />
 
         </div>
+
+        {
+          this.state.scrumbleList.map((item, index) => {
+            return <div key={index}>
+              {item}
+            </div>;
+          })
+        }
 
       </div>
     );

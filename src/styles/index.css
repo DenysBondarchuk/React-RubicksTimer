@@ -27,7 +27,7 @@ code {
 }
 
 .timer__results {
-  display: flex;
+  /* display: flex; */
 }
 
 .timer__result {
