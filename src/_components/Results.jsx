@@ -2,19 +2,22 @@ import React from 'react';
 
 import timeParse from '../_helpers/timeParse';
 
-const Results = ({ results, deleteResult, showOne }) => {
+const Results = ({ results }) => {
+
+  const resultsTime = results.map(item => item.time);
 
   return (
-    <div className="timer__results">
-      {
-        results.map((item, index) => {
-          return <div className="timer__result" key={index}>
-            <span className="timer__value">{timeParse(item)}</span> / 
-            <span className="show" onClick={() => showOne(index)}>show</span> / 
-            <span className="delete" onClick={() => deleteResult(index)}>delete</span>
-          </div>;
+    <div className="results">
+      <p className="results__title">Results</p>
+      <ul className="results__list">
+        {resultsTime.map((item, index) => {
+          return <li className="results__item" key={index}>
+            <p className="results__value">{timeParse(item)}</p>
+            <span className="results__delete"></span>
+          </li>
         })
-      }
+        }
+      </ul>
     </div>
   );
 };

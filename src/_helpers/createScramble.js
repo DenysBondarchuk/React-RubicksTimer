@@ -1,4 +1,4 @@
-export const scrambleShuffle = () => {
+export const createScramble = () => {
 	
 	const arrR = 'R';
 	const arrL = 'L';
@@ -23,15 +23,12 @@ export const scrambleShuffle = () => {
 		if ((last === arrR && last2 === arrL) || (last === arrL && last2 === arrR)) {
 			mainArr = [arrU, arrD, arrF, arrB];
 		}
-
 		else if ((last === arrU && last2 === arrD) || (last === arrD && last2 === arrU)) {
 			mainArr = [arrR, arrL, arrF, arrB];
 		}
-
 		else if ((last === arrF && last2 === arrB) || (last === arrB && last2 === arrF)) {
 			mainArr = [arrR, arrL, arrU, arrD];
 		}
-
 		else {
 			mainArr = [arrR, arrL, arrU, arrD, arrF, arrB];
 		}
@@ -61,4 +58,4 @@ export const scrambleShuffle = () => {
 
 }
 
-export default scrambleShuffle;
+export default createScramble;

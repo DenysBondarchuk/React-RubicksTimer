@@ -57,11 +57,13 @@ class Timer extends Component {
     return (
       <div
         className="timer"
-        tabIndex="0"
         onKeyDown={this.handleOnKeyDown}
         onKeyUp={this.handleOnKeyUp}
       >
-        {timeParse(this.state.ms)}
+        <p className="timer__title">Timer</p>
+        <div className="timer__container" tabIndex="0">
+          <p className="timer__value">{timeParse(this.state.ms)}</p>
+        </div>
       </div>
     );
   }
