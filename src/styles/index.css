@@ -171,3 +171,15 @@ code {
 .information__link:hover {
   background: rgba(255,255,255,0.2);
 }
+
+.information__list {
+  padding: 10px;
+}
+
+.information__item {
+  margin-bottom: 5px;
+}
+
+.information__item:last-child {
+  margin-bottom: 0px;
+}

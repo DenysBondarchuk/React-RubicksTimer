@@ -13,6 +13,7 @@ class Main extends Component {
   state = {
     currentScramble: null,
     results: [],
+    number: [],
   }
 
   componentDidMount() {
@@ -24,7 +25,7 @@ class Main extends Component {
   setResult = (value) => {
     const res = {
       time: value,
-      currentScramble: this.state.currentScramble,
+      scramble: this.state.currentScramble,
     }
 
     this.setState({
@@ -32,6 +33,13 @@ class Main extends Component {
       currentScramble: createScramble(),
     });
   };
+
+  deleteResult = (index) => {
+    const results = this.state.results.filter((_, i) => i !== index);
+    this.setState({
+      results,
+    });
+  }
 
 
   render() {
@@ -45,12 +53,16 @@ class Main extends Component {
 
           <Results
             results={this.state.results}
+            deleteResult={this.deleteResult}
           />
 
           <Statistics results={this.state.results} />
         </div>
 
-        <Information />
+        <Information
+          results={this.state.results}
+          number={this.state.number}
+        />
 
       </div>
     );
