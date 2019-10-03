@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-import timeParse from '../_helpers/timeParse';
-
 class Timer extends Component {
 
   state = {
@@ -42,6 +40,7 @@ class Timer extends Component {
   handleOnKeyDown = () => {
     if (this.state.timerOn && !this.state.timerCan) {
       this.stopTimer();
+
       this.props.setResult(this.state.ms);
 
       this.setState({ timerOn: false });
@@ -53,7 +52,6 @@ class Timer extends Component {
   }
 
   render() {
-
     return (
       <div
         className="timer"
@@ -62,7 +60,7 @@ class Timer extends Component {
       >
         <p className="timer__title">Timer</p>
         <div className="timer__container" tabIndex="0">
-          <p className="timer__value">{timeParse(this.state.ms)}</p>
+          <p className="timer__value">{this.state.ms}</p>
         </div>
       </div>
     );

@@ -1,0 +1,18 @@
+export const RESULTS = {
+  SET_RESULT: 'SET_RESULT',
+  DELETE_RESULT: 'DELETE_RESULT',
+};
+
+export const FILTERS = {
+  SHOW__ALL: 'SHOW__ALL',
+  SHOW__BEST: 'SHOW__BEST',
+  SHOW__WORST: 'SHOW__WORST',
+  SHOW__AVG5: 'SHOW__AVG5',
+  SHOW__SINGLE: 'SHOW__SINGLE',
+};
+
+
+export default {
+  RESULTS,
+  FILTERS,
+};

@@ -1,19 +1,18 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import actions from '../_actions';
 
-import timeParse from '../_helpers/timeParse';
-
-const Results = ({ results, deleteResult, showSingle }) => {
-
-  const resultsTime = results.map(item => item.time);
+const Results = ({results, deleteResultAction, filtersShowSingleAction}) => {
+  const resultsTime = results.results.map(item => item.time);
   
   return (
     <div className="results">
       <p className="results__title">Results</p>
       <ul className="results__list">
         {resultsTime.map((item, index) => {
-          return <li className="results__item" key={index} onClick={() => showSingle(index)}>
-            <p className="results__value">{timeParse(item)}</p>
-            <span  className="results__delete" onClick={() => deleteResult(index)}></span>
+          return <li className="results__item" key={index}>
+            <p className="results__value" onClick={() => filtersShowSingleAction(index)}>{item}</p>
+            <span  className="results__delete" onClick={(e) => deleteResultAction(index)}></span>
           </li>
           })
         }
@@ -22,5 +21,13 @@ const Results = ({ results, deleteResult, showSingle }) => {
   );
 };
 
+const mapStateToProps = (state) => ({
+  results: state.resultsState,
+});
 
-export default Results;
+const mapDispatchToProps = (dispatch) => ({
+  deleteResultAction: (id) => dispatch(actions.deleteResult(id)),
+  filtersShowSingleAction: (index) => dispatch(actions.filtersShowSingle(index)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Results);

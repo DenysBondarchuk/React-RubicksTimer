@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import actions from '../_actions';
 
 import Scramble from './Scramble';
 import Timer from './Timer';
@@ -22,24 +24,19 @@ class Main extends Component {
     })
   }
 
+  
   setResult = (value) => {
     const res = {
       time: value,
       scramble: this.state.currentScramble,
     }
 
+    this.props.setResultAction(res);
+
     this.setState({
-      results: [...this.state.results, res ],
       currentScramble: createScramble(),
     });
   };
-
-  deleteResult = (index) => {
-    const results = this.state.results.filter((_, i) => i !== index);
-    this.setState({
-      results,
-    });
-  }
 
 
   render() {
@@ -49,24 +46,22 @@ class Main extends Component {
         <Scramble currentScramble={this.state.currentScramble} />
 
         <div className="main">
-          <Timer setResult={this.setResult} />
+          <Timer setResult={this.setResult}/>
 
-          <Results
-            results={this.state.results}
-            deleteResult={this.deleteResult}
-          />
+          <Results />
 
           <Statistics results={this.state.results} />
         </div>
 
-        <Information
-          results={this.state.results}
-          number={this.state.number}
-        />
+        <Information />
 
       </div>
     );
   }
 }
 
-export default Main;
+const mapDispatchToProps = (dispatch) => ({
+  setResultAction: (result) => dispatch(actions.setResult(result)),
+});
+
+export default connect(null, mapDispatchToProps)(Main);
