@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import actions from '../_actions';
 
+import timeParse from '../_helpers/timeParse';
+
 const Information = ({
   results,
   filters,
@@ -50,27 +52,23 @@ const Information = ({
   const filteredResults = filterForResults(resultsTime);
 
   return (
-    <div className="information">
-      <p className="information__title">More info</p>
-      <div className="information__container">
-        <ul className="information__nav">
-          {/* <li className="information__link">Single</li> */}
-          <li className="information__link" onClick={() => filtersShowBestAction()}>Best</li>
-          <li className="information__link" onClick={() => filtersShowWorstAction()}>Worst</li>
-          <li className="information__link" onClick={() => filtersShowAvg5Action()}>Avg5</li>
-          <li className="information__link" onClick={() => filtersShowAllAction()}>All</li>
-        </ul>
-        <ul className="information__list">
-          {filteredResults && filteredResults.map((item, index) => {
-            return <li className="information__item" key={index}>
-              <span className="information__index">{index + 1}. </span>
-              <span className="information__value">{item.time} - </span>
-              <span className="information__value">{item.scramble}</span>
-            </li>
-          })
-          }
-        </ul>
-      </div>
+    <div className="information__container">
+      <ul className="information__nav">
+        <li className="information__link" onClick={() => filtersShowBestAction()}>Best</li>
+        <li className="information__link" onClick={() => filtersShowWorstAction()}>Worst</li>
+        <li className="information__link" onClick={() => filtersShowAvg5Action()}>Avg5</li>
+        <li className="information__link" onClick={() => filtersShowAllAction()}>All</li>
+      </ul>
+      <ul className="information__list">
+        {filteredResults && filteredResults.map((item, index) => {
+          return <li className="information__item" key={index}>
+            <span className="information__index">{index + 1}. </span>
+            <span className="information__value">{timeParse(item.time)} - </span>
+            <span className="information__value">{item.scramble}</span>
+          </li>
+        })
+        }
+      </ul>
     </div>
   );
 }

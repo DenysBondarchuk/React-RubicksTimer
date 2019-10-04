@@ -24,7 +24,10 @@ const Statistics = ({ results }) => {
     let all = [];
     for (let i = 0; i < res.length - 4; i++) {
       let sum = [];
-      sum.push(res[i]);sum.push(res[i+1]);sum.push(res[i+2]);sum.push(res[i+3]);sum.push(res[i+4]);
+      for (let j = 0; j < 5; j++) {
+        sum.push(res[i + j])
+      }
+      // sum.push(res[i]);sum.push(res[i+1]);sum.push(res[i+2]);sum.push(res[i+3]);sum.push(res[i+4]);
       let min = sum.indexOf(Math.min(...sum)); sum.splice(min, 1);
       let max = sum.indexOf(Math.max(...sum)); sum.splice(max, 1);
       let avg = sum.reduce((a,b) => (a + b), 0) / sum.length;
@@ -35,15 +38,22 @@ const Statistics = ({ results }) => {
   }
   const bestAvgOf5 = bestAverageOf5(resultsTime);
 
+  const [
+    ShowBestTime,
+    ShowWorstTime,
+    ShowBestAvgOf5,
+    ShowAverage,
+  ] = [timeParse(bestTime), timeParse(worstTime), timeParse(bestAvgOf5), timeParse(average)];
+
   return (
     <div className="statistics">
       <p className="statistics__title">Statistics</p>
       <ul className="statistics__list">
         <li className="statistics__item">Attempts: {resultsLength} / {resultsLength}</li>
-        <li className="statistics__item">best: {bestTime}</li>
-        <li className="statistics__item">worst: {worstTime}</li>
-        <li className="statistics__item">best avg5: {bestAvgOf5}</li>
-        <li className="statistics__item">average: {average}</li>
+        <li className="statistics__item">best: {ShowBestTime}</li>
+        <li className="statistics__item">worst: {ShowWorstTime}</li>
+        <li className="statistics__item">best avg5: {ShowBestAvgOf5}</li>
+        <li className="statistics__item">average: {ShowAverage}</li>
       </ul>
     </div>
   );

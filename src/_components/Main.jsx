@@ -6,7 +6,7 @@ import Scramble from './Scramble';
 import Timer from './Timer';
 import Statistics from './Statistics';
 import Results from './Results';
-import Information from './Information';
+import MoreInfo from './MoreInfo';
 
 import createScramble from '../_helpers/createScramble';
 
@@ -24,14 +24,13 @@ class Main extends Component {
     })
   }
 
-  
   setResult = (value) => {
-    const res = {
+    const result = {
       time: value,
       scramble: this.state.currentScramble,
     }
 
-    this.props.setResultAction(res);
+    this.props.setResultAction(result);
 
     this.setState({
       currentScramble: createScramble(),
@@ -46,14 +45,14 @@ class Main extends Component {
         <Scramble currentScramble={this.state.currentScramble} />
 
         <div className="main">
-          <Timer setResult={this.setResult}/>
+          <Timer setResult={this.setResult} />
 
           <Results />
 
-          <Statistics results={this.state.results} />
+          <Statistics />
         </div>
 
-        <Information />
+        <MoreInfo />
 
       </div>
     );
