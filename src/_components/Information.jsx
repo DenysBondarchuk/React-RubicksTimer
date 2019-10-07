@@ -6,7 +6,10 @@ import actions from '../_actions';
 import timeParse from '../_helpers/timeParse';
 
 const propTypes = {
-  results: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  results: PropTypes.arrayOf(PropTypes.shape({
+    time: PropTypes.number.isRequired,
+    scramble: PropTypes.string.isRequired,
+  })).isRequired,
   filters: PropTypes.shape({
     all: PropTypes.bool.isRequired,
     single: PropTypes.bool.isRequired,
