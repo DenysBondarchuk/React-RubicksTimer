@@ -123,7 +123,7 @@ code {
       top: 0;
       left: 0;
       transform: translateX(100%);
-      transition: .3s ease-in;
+      transition: .2s ease-in;
       z-index: -1;
     }
     &:hover {
@@ -165,6 +165,7 @@ code {
   &__title {
     display: inline-block;
     padding-right: 24px;
+    overflow: hidden;
     position: relative;
     cursor: pointer;
     &::before {
@@ -177,9 +178,29 @@ code {
       right: 0;
       top: 50%;
       transform: translateY(-50%) rotate(0deg);
+      transition: 0.3s ease-out;
+      opacity: 1;
+    }
+    &::after {
+      content: '';
+      width: 14px;
+      height: 14px;
+      background: url(../assets/arrow.svg) no-repeat center center / contain;
+
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-150%) rotate(180deg);
+      transition: 0.3s ease-out;
+      opacity: 0;
     }
     &.active::before {
+      transform: translateY(50%) rotate(0deg);
+      opacity: 0;
+    }
+    &.active::after {
       transform: translateY(-50%) rotate(180deg);
+      opacity: 1;
     }
   }
 

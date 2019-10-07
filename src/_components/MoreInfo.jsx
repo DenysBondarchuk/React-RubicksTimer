@@ -4,29 +4,29 @@ import Information from './Information';
 
 
 class MoreInfo extends Component {
-
   state = {
     open: false,
   }
 
   openInformation = () => {
-    this.setState({
-      open: !this.state.open,
-    })
+    this.setState(({ open }) => ({ open: !open }));
   };
 
   render() {
     const { open } = this.state;
+
     return (
       <div className="information">
         <div className="information__top">
-          <p 
-            className= {"information__title" + (open ? ' active' : '') }
+          <span
+            className={`information__title${open ? ' active' : ''}`}
+            role="button"
             onClick={this.openInformation}
-
-          >More info</p>
+          >
+            More info
+          </span>
         </div>
-        { open && <Information />}
+        {open && <Information />}
       </div>
     );
   }

@@ -1,13 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import actions from '../_actions';
+import PropTypes from 'prop-types';
 
+import actions from '../_actions';
 import timeParse from '../_helpers/timeParse';
+
+const propTypes = {
+  results: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  deleteResultAction: PropTypes.func.isRequired,
+  filtersShowSingleAction: PropTypes.func.isRequired,
+};
+const defaultProps = {};
 
 const Results = ({
   results,
   deleteResultAction,
-  filtersShowSingleAction
+  filtersShowSingleAction,
 }) => {
   const resultsTime = results.map(({ time }) => time);
 
@@ -16,20 +24,23 @@ const Results = ({
       <p className="results__title">Results</p>
       <ul className="results__list">
         {
-          resultsTime.map((item, index) => (
+          resultsTime.map((time, index) => (
             <li className="results__item" key={index}>
-              <p
+              <span
                 className="results__value"
+                role="button"
                 title="more info"
                 onClick={() => filtersShowSingleAction(index)}
               >
-                {timeParse(item)}
-              </p>
+                {timeParse(time)}
+              </span>
               <span
                 className="results__delete"
+                role="button"
+                aria-label="delete"
                 title="delete result"
-                onClick={(e) => deleteResultAction(index)}
-              ></span>
+                onClick={() => deleteResultAction(index)}
+              />
             </li>
           ))
         }
@@ -37,6 +48,10 @@ const Results = ({
     </div>
   );
 };
+
+
+Results.propTypes = propTypes;
+Results.defaultProps = defaultProps;
 
 const mapStateToProps = (state) => ({
   results: state.resultsState.results,

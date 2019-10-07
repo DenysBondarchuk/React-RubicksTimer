@@ -1,41 +1,46 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import timeParse from '../_helpers/timeParse';
 
-const Statistics = ({ results }) => {
+const propTypes = {
+  results: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+};
+const defaultProps = {};
 
-  const resultsTime = results.map(item => item.time);
+
+const Statistics = ({ results }) => {
+  const resultsTime = results.map(({ time }) => time);
   const resultsLength = resultsTime.length;
   const bestTime = Math.min(...resultsTime);
   const worstTime = Math.max(...resultsTime);
 
-  const resultsWithoutMinAndMax = (resultsTime) => {
-    const res = resultsTime.slice();
+  const resultsWithoutMinAndMax = (resultsTimeArr) => {
+    const res = resultsTimeArr.slice();
     const max = res.indexOf(Math.max(...res)); res.splice(max, 1);
     const min = res.indexOf(Math.min(...res)); res.splice(min, 1);
     const average = res.reduce((a, b) => (a + b), 0) / res.length;
     return average;
-  }
+  };
   const average = resultsWithoutMinAndMax(resultsTime);
 
-  const bestAverageOf5 = (resultsTime) => {
-    const res = resultsTime.slice();
-    let all = [];
-    for (let i = 0; i < res.length - 4; i++) {
-      let sum = [];
-      for (let j = 0; j < 5; j++) {
-        sum.push(res[i + j])
+  const bestAverageOf5 = (resultsTimeArr) => {
+    const res = resultsTimeArr.slice();
+    const all = [];
+    for (let i = 0; i < res.length - 4; i += 1) {
+      const sum = [];
+      for (let j = 0; j < 5; j += 1) {
+        sum.push(res[i + j]);
       }
-      // sum.push(res[i]);sum.push(res[i+1]);sum.push(res[i+2]);sum.push(res[i+3]);sum.push(res[i+4]);
-      let min = sum.indexOf(Math.min(...sum)); sum.splice(min, 1);
-      let max = sum.indexOf(Math.max(...sum)); sum.splice(max, 1);
-      let avg = sum.reduce((a,b) => (a + b), 0) / sum.length;
+      const min = sum.indexOf(Math.min(...sum)); sum.splice(min, 1);
+      const max = sum.indexOf(Math.max(...sum)); sum.splice(max, 1);
+      const avg = sum.reduce((a, b) => (a + b), 0) / sum.length;
       all.push(avg);
     }
-    let min = Math.min(...all);
-    return min
-  }
+    const min = Math.min(...all);
+    return min;
+  };
   const bestAvgOf5 = bestAverageOf5(resultsTime);
 
   const [
@@ -58,6 +63,9 @@ const Statistics = ({ results }) => {
     </div>
   );
 };
+
+Statistics.propTypes = propTypes;
+Statistics.defaultProps = defaultProps;
 
 
 const mapStateToProps = (state) => ({

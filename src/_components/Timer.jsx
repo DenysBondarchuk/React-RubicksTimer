@@ -1,19 +1,26 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import timeParse from '../_helpers/timeParse';
 
-class Timer extends Component {
+const propTypes = {
+  setResult: PropTypes.func.isRequired,
+};
+const defaultProps = {};
 
+class Timer extends Component {
   state = {
     timerOn: false,
     timerCan: true,
     ms: 0,
   }
 
+  componentWillUnmount() {
+    clearInterval(this.timer);
+  }
+
   tick = () => {
-    this.setState({
-      ms: this.state.ms + 10,
-    })
+    this.setState(({ ms }) => ({ ms: ms + 10 }));
   }
 
   startTimer = () => {
@@ -24,17 +31,13 @@ class Timer extends Component {
     clearInterval(this.timer);
   }
 
-  componentWillUnmount() {
-    clearInterval(this.timer);
-  }
-
   handleOnKeyUp = (e) => {
     if (e.keyCode === 32 && !this.state.timerOn && this.state.timerCan) {
       this.setState({
         timerOn: true,
         timerCan: false,
         ms: 0,
-      })
+      });
       this.startTimer();
     }
   }
@@ -49,7 +52,7 @@ class Timer extends Component {
 
       setTimeout(() => {
         this.setState({ timerCan: true });
-      }, 1000)
+      }, 1000);
     }
   }
 
@@ -59,16 +62,22 @@ class Timer extends Component {
     return (
       <div
         className="timer"
+        role="textbox"
+        tabIndex="0"
         onKeyDown={this.handleOnKeyDown}
         onKeyUp={this.handleOnKeyUp}
       >
         <p className="timer__title">Timer</p>
-        <div className="timer__container" tabIndex="0">
+        <div className="timer__container">
           <p className="timer__value">{time}</p>
         </div>
       </div>
     );
   }
 }
+
+
+Timer.propTypes = propTypes;
+Timer.defaultProps = defaultProps;
 
 export default Timer;
