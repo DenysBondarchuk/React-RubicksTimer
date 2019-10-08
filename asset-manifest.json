@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/React-RubicksTimer/static/css/main.800ccf47.chunk.css",
+    "main.js": "/React-RubicksTimer/static/js/main.8ade5992.chunk.js",
+    "main.js.map": "/React-RubicksTimer/static/js/main.8ade5992.chunk.js.map",
+    "runtime-main.js": "/React-RubicksTimer/static/js/runtime-main.84c14d79.js",
+    "runtime-main.js.map": "/React-RubicksTimer/static/js/runtime-main.84c14d79.js.map",
+    "static/js/2.ef89e0c8.chunk.js": "/React-RubicksTimer/static/js/2.ef89e0c8.chunk.js",
+    "static/js/2.ef89e0c8.chunk.js.map": "/React-RubicksTimer/static/js/2.ef89e0c8.chunk.js.map",
+    "index.html": "/React-RubicksTimer/index.html",
+    "precache-manifest.f547748a57a2185a6ab30c0de528bfdb.js": "/React-RubicksTimer/precache-manifest.f547748a57a2185a6ab30c0de528bfdb.js",
+    "service-worker.js": "/React-RubicksTimer/service-worker.js",
+    "static/css/main.800ccf47.chunk.css.map": "/React-RubicksTimer/static/css/main.800ccf47.chunk.css.map",
+    "static/media/index.scss": "/React-RubicksTimer/static/media/delete-red.e0d25831.svg"
+  }
+}
