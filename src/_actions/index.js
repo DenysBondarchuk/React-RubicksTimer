@@ -1,6 +1,4 @@
-import { RESULTS } from '../_constants/constants';
-import { FILTERS } from '../_constants/constants';
-
+import { RESULTS, FILTERS } from '../_constants/constants';
 
 
 const setResult = (result) => (dispatch) => (
@@ -8,7 +6,7 @@ const setResult = (result) => (dispatch) => (
 );
 
 const deleteResult = (index) => (dispatch) => {
-  dispatch({ type: RESULTS.DELETE_RESULT, payload: index })
+  dispatch({ type: RESULTS.DELETE_RESULT, payload: index });
 };
 
 const filtersShowAll = () => (dispatch) => (
