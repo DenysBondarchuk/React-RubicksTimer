@@ -58,10 +58,10 @@ const Statistics = ({ results }) => {
       <p className="statistics__title">Statistics</p>
       <ul className="statistics__list">
         <li className="statistics__item">Attempts: {resultsLength} / {resultsLength}</li>
-        <li className="statistics__item">best: {ShowBestTime}</li>
-        <li className="statistics__item">worst: {ShowWorstTime}</li>
-        <li className="statistics__item">best avg5: {ShowBestAvgOf5}</li>
-        <li className="statistics__item">average: {ShowAverage}</li>
+        <li className="statistics__item">best time: { (resultsLength > 0) ? ShowBestTime : '00:00' }</li>
+        <li className="statistics__item">worst time: { (resultsLength > 0) ? ShowWorstTime : '00:00' }</li>
+        <li className="statistics__item">best avg5: { (resultsLength > 4) ? ShowBestAvgOf5 : '00:00' }</li>
+        <li className="statistics__item">average: { (resultsLength > 2) ? ShowAverage : '00:00' }</li>
       </ul>
     </div>
   );
